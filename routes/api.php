@@ -33,6 +33,14 @@ Route::get('/cliente/{idCliente}', [ClienteController::class, 'show'])->name('cl
 
 //Rutas de ViajeController
 
-Route::get('/viaje', [ViajeController::class, 'index'])->name('viaje.index');
-Route::post('/viaje', [ViajeController::class, 'store'])->name('viaje.store');
-Route::get('/viaje/{idViaje}', [ViajeController::class, 'show'])->name('viaje.show');
+Route::post('/viajes', [ViajeController::class, 'store'])->name('viajes.store');
+Route::get('/viajes/{idViaje}', [ViajeController::class, 'show'])->name('viajes.show');
+
+// Aceptar un viaje
+Route::post('/viajes/{viaje}/accept', [ViajeController::class, 'accept'])->name('viajes.accept');
+// Empezar un viaje
+Route::post('/viajes/{viaje}/start', [ViajeController::class, 'start'])->name('viajes.start');
+// Terminar un viaje
+Route::post('/viajes/{viaje}/end', [ViajeController::class, 'end'])->name('viajes.end');
+// Actualizar la ubicación del conductor en un viaje
+Route::post('/viajes/{viaje}/location', [ViajeController::class, 'location'])->name('viajes.location');
