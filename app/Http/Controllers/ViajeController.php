@@ -59,17 +59,32 @@ class ViajeController extends Controller
         return response()->json($viaje, 201);
     }
 
-    public function show(Request $request, Viaje $viaje)
+    public function show($idViaje)
     {
-        $clienteViaje = ClienteViaje::where('idViaje', $viaje->idViaje)
-            ->where('idCliente', $request->idCliente)
-            ->first();
 
-        if ($clienteViaje) {
-            return response()->json($viaje, 200);
-        }
+        $viaje = Viaje::where('idViaje', $idViaje)->first();
 
-        return response()->json(['message' => 'Cannot find this trip.'], 404);
+       if($viaje)
+       {
+            return response()->json([
+
+                'status'=> 200,
+                'viaje'=> $viaje
+
+            ], 200);
+       }
+       else
+       {
+
+            return response()->json([
+
+                'status'=> 404,
+                'message'=> "User Not Found"
+
+             ], 404);
+        
+       }
+
     }
 
     public function accept(Request $request, Viaje $viaje)
