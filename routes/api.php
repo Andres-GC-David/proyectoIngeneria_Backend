@@ -6,6 +6,8 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ChoferController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ViajeController;
+use App\Http\Controllers\AuthController;
+
 
 
 Route::get('/user', function (Request $request) {
@@ -44,3 +46,10 @@ Route::post('/viajes/{viaje}/start', [ViajeController::class, 'start'])->name('v
 Route::post('/viajes/{viaje}/end', [ViajeController::class, 'end'])->name('viajes.end');
 // Actualizar la ubicación del conductor en un viaje
 Route::post('/viajes/{viaje}/location', [ViajeController::class, 'location'])->name('viajes.location');
+
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/verify', [AuthController::class, 'verify']);
+
+

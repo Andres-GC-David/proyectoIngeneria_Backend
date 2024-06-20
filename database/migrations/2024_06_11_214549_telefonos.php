@@ -14,7 +14,8 @@ return new class extends Migration
 
             $table->id('idTelefono');
             $table->unsignedBigInteger('idUsuario');
-            $table->integer('telefono');
+            $table->string('telefono');
+            $table->boolean('isVerified')->default(false);
             $table->timestamps();
 
             $table->foreign('idUsuario')->references('idUsuario')->on('usuario')->onUpdate('cascade')->onDelete('cascade');
