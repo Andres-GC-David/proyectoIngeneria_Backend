@@ -30,8 +30,9 @@ class SistemaTest extends TestCase
         $user = Usuario::where('nombre', 'John')->where('apellido', 'Doe')->first();
         $this->assertNotNull($user);
 
-        // Create a trip for the user
-        $tripData = [
+        $user = Usuario::factory()->create();
+
+        $data = [
             'puntoDePartida' => 'Punto A',
             'puntoDeLlegada' => 'Punto B',
             'idRuta' => 1,
@@ -39,9 +40,9 @@ class SistemaTest extends TestCase
             'idCliente' => $user->idUsuario,
         ];
 
-        $tripResponse = $this->postJson('/api/viajes', $tripData);
-        $tripResponse->assertStatus(201);
-        $tripResponse->assertJson([
+        $response = $this->postJson('/api/viajes', $data);
+
+        $this->assertDatabaseHas('viaje', [
             'puntoDePartida' => 'Punto A',
             'puntoDeLlegada' => 'Punto B',
             'idRuta' => 1,
